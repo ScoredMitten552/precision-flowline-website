@@ -1,66 +1,95 @@
 @import "tailwindcss";
 
-@keyframes ripple {
-  0% { transform: scale(0.8); opacity: 0.6; }
-  100% { transform: scale(3); opacity: 0; }
+/* ─── Brand tokens ─── */
+:root {
+  --navy:       #0A1172;
+  --navy-dark:  #060C5A;
+  --navy-deep:  #040840;
+  --cyan:       #00B4D8;
+  --cyan-light: #48CAE4;
+  --blue-mid:   #4A90D9;
+  --white:      #FFFFFF;
 }
 
+/* ─── Resets ─── */
+*, *::before, *::after { box-sizing: border-box; }
+body { margin: 0; padding: 0; background: #0A1172; color: #fff; font-family: 'Inter', system-ui, sans-serif; }
+#root { width: 100%; min-height: 100vh; }
+
+/* ─── Rain / hero background ─── */
+@keyframes rain {
+  0%   { transform: translateY(-120px); opacity: 0; }
+  8%   { opacity: 0.7; }
+  92%  { opacity: 0.7; }
+  100% { transform: translateY(110vh);  opacity: 0; }
+}
+
+/* ─── Ripple rings ─── */
+@keyframes ripple {
+  0%   { transform: scale(0.6); opacity: 0.7; }
+  100% { transform: scale(3);   opacity: 0; }
+}
+
+/* ─── Wave banner ─── */
 @keyframes wave {
-  0% { transform: translateX(0) scaleY(1); }
-  50% { transform: translateX(-25%) scaleY(0.85); }
+  0%   { transform: translateX(0)   scaleY(1); }
+  50%  { transform: translateX(-25%) scaleY(0.82); }
   100% { transform: translateX(-50%) scaleY(1); }
 }
 
-@keyframes float {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-18px); }
+/* ─── Floating Y ─── */
+@keyframes floatY {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-16px); }
 }
 
-@keyframes rain {
-  0% { transform: translateY(-100px); opacity: 0; }
-  10% { opacity: 1; }
-  90% { opacity: 1; }
-  100% { transform: translateY(110vh); opacity: 0; }
-}
-
+/* ─── Shimmer text ─── */
 @keyframes shimmer {
-  0% { background-position: -200% center; }
-  100% { background-position: 200% center; }
+  0%   { background-position: -200% center; }
+  100% { background-position:  200% center; }
 }
 
-body {
-  margin: 0;
-  padding: 0;
-  font-family: system-ui, -apple-system, sans-serif;
-  background: #0A0F6B;
-  color: white;
+/* ─── Slider handle pulse ─── */
+@keyframes handlePulse {
+  0%   { box-shadow: 0 0 0 0   rgba(0, 180, 216, 0.8); }
+  50%  { box-shadow: 0 0 0 14px rgba(0, 180, 216, 0); }
+  100% { box-shadow: 0 0 0 0   rgba(0, 180, 216, 0); }
 }
 
-#root {
+/* ─── Water dash (mobile fallback) ─── */
+@keyframes waterDrop {
+  0%   { transform: translateY(-40px); opacity: 0; }
+  15%  { opacity: 1; }
+  85%  { opacity: 1; }
+  100% { transform: translateY(200px); opacity: 0; }
+}
+@keyframes poolSpread {
+  0%   { width: 20px; opacity: 0; }
+  100% { width: 160px; opacity: 0.7; }
+}
+@keyframes drainSuck {
+  0%   { width: 160px; opacity: 0.7; }
+  100% { width: 0;     opacity: 0; }
+}
+@keyframes cutAppear {
+  0%   { opacity: 0; box-shadow: none; }
+  100% { opacity: 1; box-shadow: 0 0 12px rgba(0,180,216,0.8); }
+}
+
+/* ─── Diagonal water-slash SVG element ─── */
+.water-slash {
+  display: block;
   width: 100%;
-  min-height: 100vh;
+  overflow: hidden;
+  line-height: 0;
 }
 
-.wave-anim {
-  animation: wave 10s linear infinite;
-}
-
-.wave-anim-slow {
-  animation: wave 15s linear infinite reverse;
-}
-
-.ripple-anim {
-  animation: ripple 3.5s ease-out infinite;
-}
-
-.float-anim {
-  animation: float 5s ease-in-out infinite;
-}
-
-.rain-drop {
-  animation: rain linear infinite;
-}
-
+/* ─── Utility animations ─── */
+.rain-drop    { animation: rain       linear    infinite; }
+.ripple-anim  { animation: ripple     3.5s ease-out infinite; }
+.wave-anim    { animation: wave       10s  linear    infinite; }
+.wave-slow    { animation: wave       16s  linear    infinite reverse; }
+.float-anim   { animation: floatY     5s   ease-in-out infinite; }
 .shimmer-text {
   background: linear-gradient(90deg, #00B4D8, #ffffff, #00B4D8);
   background-size: 200% auto;
@@ -69,6 +98,26 @@ body {
   animation: shimmer 3s linear infinite;
 }
 
-* {
-  box-sizing: border-box;
+.slider-handle:hover {
+  animation: handlePulse 1.2s ease-out infinite;
+}
+
+/* ─── Diagonal clip-paths ─── */
+.clip-diagonal-bottom {
+  clip-path: polygon(0 0, 100% 0, 100% 93%, 0 100%);
+}
+.clip-diagonal-top {
+  clip-path: polygon(0 4%, 100% 0, 100% 100%, 0 100%);
+}
+.clip-diagonal-both {
+  clip-path: polygon(0 4%, 100% 0, 100% 94%, 0 100%);
+}
+
+/* ─── Responsive nav helpers ─── */
+@media (max-width: 768px) {
+  .nav-desktop { display: none !important; }
+  .nav-mobile  { display: flex  !important; }
+}
+@media (min-width: 769px) {
+  .nav-mobile { display: none !important; }
 }

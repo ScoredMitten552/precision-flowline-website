@@ -14,63 +14,59 @@ function FadeIn({ children, delay = 0 }) {
   )
 }
 
-const comparisonRows = [
-  { category: 'Project Duration', pf: 'Hours to 1 day', traditional: '1–4 weeks', advantage: true },
-  { category: 'Cost per Sq Ft', pf: '$2–4', traditional: '$12–20', advantage: true },
-  { category: 'Traffic Control Duration', pf: 'Hours', traditional: 'Days to weeks', advantage: true },
-  { category: 'Pavement Removed', pf: 'Minimal (pilot cuts only)', traditional: 'Full surface or full depth', advantage: true },
-  { category: 'Disposal Required', pf: 'Minimal to none', traditional: 'Extensive haul-off', advantage: true },
-  { category: 'Success Verification', pf: 'Live flow testing on every project', traditional: 'Visual inspection only', advantage: true },
-  { category: 'Success Rate', pf: '98%', traditional: 'Varies widely (no standard)', advantage: true },
-  { category: 'Disruption to Operations', pf: 'Minimal — short closures', traditional: 'Major disruption for weeks', advantage: true },
-  { category: 'Material Usage', pf: 'Targeted, precision only', traditional: 'Full-surface replacement', advantage: true },
-  { category: 'Warranty / Verification', pf: 'Flow-test documentation included', traditional: 'Rarely provided', advantage: true },
-  { category: 'Environmental Impact', pf: 'Low waste, low footprint', traditional: 'High material waste', advantage: true },
-  { category: 'Regulatory Documentation', pf: 'Full package provided', traditional: 'Limited documentation', advantage: true },
+function SlashDivider({ color = '#0A1172', flip = false }) {
+  return (
+    <div className="water-slash" style={{ lineHeight: 0, transform: flip ? 'scaleX(-1)' : 'none' }}>
+      <svg viewBox="0 0 1440 64" preserveAspectRatio="none" style={{ width: '100%', height: 64, display: 'block' }}>
+        <polygon points="0,64 1440,0 1440,64" fill={color}/>
+        <line x1="0" y1="64" x2="1440" y2="0" stroke="rgba(0,180,216,0.35)" strokeWidth="2"/>
+      </svg>
+    </div>
+  )
+}
+
+const rows = [
+  { cat: 'Project Duration',           pf: 'Hours to 1 day',                  trad: '1–4 weeks' },
+  { cat: 'Cost per Sq Ft',             pf: '$2–4',                             trad: '$12–20' },
+  { cat: 'Traffic Control Duration',   pf: 'Hours',                            trad: 'Days to weeks' },
+  { cat: 'Pavement Removed',           pf: 'Minimal (pilot cuts only)',         trad: 'Full surface or full depth' },
+  { cat: 'Disposal Required',          pf: 'Minimal to none',                  trad: 'Extensive haul-off' },
+  { cat: 'Success Verification',       pf: 'Live flow testing — every project', trad: 'Visual inspection only' },
+  { cat: 'Success Rate',               pf: '98%',                              trad: 'Varies — no standard' },
+  { cat: 'Disruption to Operations',   pf: 'Minimal — short closures',         trad: 'Major disruption for weeks' },
+  { cat: 'Material Usage',             pf: 'Targeted, precision only',          trad: 'Full-surface replacement' },
+  { cat: 'Warranty / Verification',    pf: 'Flow-test documentation included',  trad: 'Rarely provided' },
+  { cat: 'Environmental Impact',       pf: 'Low waste, low footprint',          trad: 'High material waste' },
+  { cat: 'Regulatory Documentation',  pf: 'Full package provided',             trad: 'Limited documentation' },
+]
+
+const clients = [
+  { icon: '🏛️', t: 'Municipal Engineers',   d: 'Road departments, DOT agencies, and city infrastructure teams benefit from reduced traffic control costs, faster project closeout, and verified flow documentation for compliance.', tags: ['DOT Projects','Roadway Ponding','Municipal ROW'] },
+  { icon: '🏢', t: 'Property Managers',     d: 'Commercial and retail property managers eliminate parking lot liability, reduce tenant complaints, and protect pavement assets at a fraction of overlay costs.', tags: ['Parking Lots','Retail Centers','Commercial Complexes'] },
+  { icon: '🏗️', t: 'General Contractors',   d: 'GCs and civil contractors use Precision Flowline as a high-value subcontractor delivering superior drainage results without schedule impact.', tags: ['Subcontractor Work','Site Development','Grading & Drainage'] },
+  { icon: '🏭', t: 'Industrial Facilities', d: "Warehouses, distribution centers, and industrial campuses can't afford weeks-long closures. Our single-day solutions keep operations running.", tags: ['Warehouses','Loading Docks','Industrial Sites'] },
 ]
 
 export default function WhyPF() {
   return (
-    <main>
+    <main style={{ background: '#0A1172' }}>
+
       {/* HEADER */}
-      <section style={{
-        paddingTop: 120, paddingBottom: 80, paddingLeft: 24, paddingRight: 24,
-        background: 'linear-gradient(160deg, #0A0F6B 0%, #070B52 60%, #051040 100%)',
-        position: 'relative', overflow: 'hidden',
-      }}>
-        <div style={{
-          position: 'absolute', inset: 0,
-          backgroundImage: `linear-gradient(rgba(0,180,216,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(0,180,216,0.05) 1px, transparent 1px)`,
-          backgroundSize: '60px 60px',
-        }} />
-        <div style={{ position: 'relative', zIndex: 1, maxWidth: 820, margin: '0 auto', textAlign: 'center' }}>
-          <motion.div
-            initial={{ opacity: 0, y: -16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}
-            style={{
-              display: 'inline-block', background: 'rgba(0,180,216,0.15)',
-              border: '1px solid rgba(0,180,216,0.35)', borderRadius: 100,
-              padding: '6px 18px', color: '#00B4D8', fontSize: 12, fontWeight: 700,
-              letterSpacing: 2, marginBottom: 20,
-            }}
-          >
+      <section style={{ padding: '120px 24px 80px', background: 'linear-gradient(160deg, #0A1172 0%, #060C5A 55%, #040840 100%)', position: 'relative', overflow: 'hidden' }}>
+        <div style={{ position: 'absolute', inset: 0, backgroundImage: `linear-gradient(rgba(0,180,216,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(0,180,216,0.05) 1px, transparent 1px)`, backgroundSize: '64px 64px' }}/>
+        <div style={{ position: 'absolute', top: '58%', left: '-5%', right: '-5%', height: 3, background: 'linear-gradient(90deg, transparent, rgba(0,180,216,0.4), transparent)', transform: 'rotate(-5deg)' }}/>
+        <div style={{ position: 'relative', zIndex: 1, maxWidth: 800, margin: '0 auto', textAlign: 'center' }}>
+          <motion.div initial={{ opacity: 0, y: -14 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}
+            style={{ display: 'inline-block', background: 'rgba(0,180,216,0.13)', border: '1px solid rgba(0,180,216,0.35)', borderRadius: 100, padding: '6px 20px', color: '#00B4D8', fontSize: 11, fontWeight: 700, letterSpacing: 2.5, marginBottom: 22 }}>
             HEAD-TO-HEAD COMPARISON
           </motion.div>
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.1 }}
-            style={{
-              fontFamily: "'Barlow Condensed', sans-serif",
-              fontWeight: 900, fontSize: 'clamp(48px, 7vw, 80px)',
-              color: 'white', margin: '0 0 20px', lineHeight: 0.95,
-            }}
-          >
-            WHY <span style={{ color: '#00B4D8' }}>PRECISION</span><br />FLOWLINE
+          <motion.h1 initial={{ opacity: 0, y: 22 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.1 }}
+            style={{ fontFamily: "'Barlow Condensed',sans-serif", fontWeight: 900, fontSize: 'clamp(48px,7vw,84px)', color: '#fff', margin: '0 0 20px', lineHeight: 0.93 }}>
+            WHY <span style={{ color: '#00B4D8' }}>PRECISION</span><br/>FLOWLINE
           </motion.h1>
-          <motion.p
-            initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.8, delay: 0.25 }}
-            style={{ color: 'rgba(255,255,255,0.65)', fontSize: 18, lineHeight: 1.65, maxWidth: 600, margin: '0 auto' }}
-          >
-            Twelve categories. Twelve wins. See exactly how Precision Flowline stacks up
-            against traditional ponding mitigation methods.
+          <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.8, delay: 0.25 }}
+            style={{ color: 'rgba(255,255,255,0.62)', fontSize: 18, lineHeight: 1.7, maxWidth: 560, margin: '0 auto' }}>
+            Twelve categories. Twelve wins. See exactly how Precision Flowline stacks up against traditional ponding mitigation.
           </motion.p>
         </div>
       </section>
@@ -78,202 +74,99 @@ export default function WhyPF() {
       {/* COMPARISON TABLE */}
       <section style={{ padding: '80px 24px', background: 'rgba(0,0,0,0.1)' }}>
         <div style={{ maxWidth: 1100, margin: '0 auto' }}>
-          {/* Table header */}
+          {/* Header */}
           <FadeIn>
             <div style={{
-              display: 'grid',
-              gridTemplateColumns: '1fr 1fr 1fr',
-              gap: 0,
+              display: 'grid', gridTemplateColumns: '1fr 1fr 1fr',
               background: 'rgba(0,180,216,0.08)',
               border: '1px solid rgba(0,180,216,0.25)',
-              borderRadius: '16px 16px 0 0',
-              overflow: 'hidden',
+              borderRadius: '16px 16px 0 0', overflow: 'hidden',
             }}>
-              <div style={{ padding: '20px 24px', color: 'rgba(255,255,255,0.5)', fontWeight: 700, fontSize: 13, letterSpacing: 1 }}>
-                CATEGORY
-              </div>
-              <div style={{
-                padding: '20px 24px',
-                background: 'rgba(0,180,216,0.2)',
-                borderLeft: '1px solid rgba(0,180,216,0.3)',
-                display: 'flex', alignItems: 'center', gap: 10,
-              }}>
-                <div style={{
-                  width: 28, height: 28, borderRadius: 6,
-                  background: 'linear-gradient(135deg, #00B4D8, #0096B7)',
-                  display: 'flex', alignItems: 'center', justifyContent: 'center',
-                }}>
-                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-                    <path d="M2 7 Q3.5 4 7 7 Q10.5 10 12 7" stroke="white" strokeWidth="2" strokeLinecap="round" fill="none"/>
-                    <path d="M2 4 Q3.5 1 7 4 Q10.5 7 12 4" stroke="white" strokeWidth="1.5" strokeLinecap="round" fill="none" opacity="0.6"/>
-                  </svg>
+              <div style={{ padding: '20px 24px', color: 'rgba(255,255,255,0.4)', fontWeight: 700, fontSize: 12, letterSpacing: 1.5 }}>CATEGORY</div>
+              <div style={{ padding: '20px 24px', background: 'rgba(0,180,216,0.18)', borderLeft: '1px solid rgba(0,180,216,0.3)', display: 'flex', alignItems: 'center', gap: 10 }}>
+                <div style={{ width: 26, height: 26, borderRadius: 6, background: 'linear-gradient(135deg, #00B4D8, #0096B7)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                  <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M1 6 Q3.5 2 7 6 Q10.5 10 13 6" stroke="white" strokeWidth="2" strokeLinecap="round" fill="none"/></svg>
                 </div>
-                <span style={{ color: 'white', fontWeight: 800, fontSize: 15 }}>Precision Flowline</span>
+                <span style={{ color: '#fff', fontWeight: 800, fontSize: 14 }}>Precision Flowline</span>
               </div>
-              <div style={{
-                padding: '20px 24px',
-                borderLeft: '1px solid rgba(255,255,255,0.08)',
-              }}>
-                <span style={{ color: 'rgba(255,255,255,0.45)', fontWeight: 700, fontSize: 15 }}>Traditional Methods</span>
+              <div style={{ padding: '20px 24px', borderLeft: '1px solid rgba(255,255,255,0.07)' }}>
+                <span style={{ color: 'rgba(255,255,255,0.38)', fontWeight: 700, fontSize: 14 }}>Traditional Methods</span>
               </div>
             </div>
           </FadeIn>
 
-          {/* Table rows */}
-          {comparisonRows.map((row, i) => (
-            <FadeIn key={i} delay={i * 0.04}>
+          {/* Rows */}
+          {rows.map((row, i) => (
+            <FadeIn key={i} delay={i * 0.035}>
               <div style={{
-                display: 'grid',
-                gridTemplateColumns: '1fr 1fr 1fr',
-                gap: 0,
-                borderLeft: '1px solid rgba(0,180,216,0.15)',
-                borderRight: '1px solid rgba(0,180,216,0.15)',
-                borderBottom: '1px solid rgba(255,255,255,0.06)',
-                background: i % 2 === 0 ? 'rgba(0,0,0,0.1)' : 'transparent',
+                display: 'grid', gridTemplateColumns: '1fr 1fr 1fr',
+                borderLeft: '1px solid rgba(0,180,216,0.14)',
+                borderRight: '1px solid rgba(0,180,216,0.14)',
+                borderBottom: '1px solid rgba(255,255,255,0.055)',
+                background: i % 2 === 0 ? 'rgba(0,0,0,0.08)' : 'transparent',
               }}>
-                <div style={{ padding: '18px 24px', display: 'flex', alignItems: 'center' }}>
-                  <span style={{ color: 'rgba(255,255,255,0.7)', fontSize: 14, fontWeight: 600 }}>{row.category}</span>
+                <div style={{ padding: '17px 24px', display: 'flex', alignItems: 'center' }}>
+                  <span style={{ color: 'rgba(255,255,255,0.65)', fontSize: 14, fontWeight: 600 }}>{row.cat}</span>
                 </div>
-                <div style={{
-                  padding: '18px 24px',
-                  background: 'rgba(0,180,216,0.05)',
-                  borderLeft: '1px solid rgba(0,180,216,0.15)',
-                  display: 'flex', alignItems: 'center', gap: 10,
-                }}>
-                  <div style={{
-                    width: 20, height: 20, borderRadius: '50%',
-                    background: 'rgba(0,180,216,0.15)',
-                    border: '1.5px solid #00B4D8',
-                    display: 'flex', alignItems: 'center', justifyContent: 'center',
-                    flexShrink: 0,
-                  }}>
-                    <svg width="10" height="8" viewBox="0 0 10 8" fill="none">
-                      <path d="M1 4L3.5 6.5L9 1" stroke="#00B4D8" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
-                    </svg>
+                <div style={{ padding: '17px 24px', background: 'rgba(0,180,216,0.04)', borderLeft: '1px solid rgba(0,180,216,0.12)', display: 'flex', alignItems: 'center', gap: 10 }}>
+                  <div style={{ width: 18, height: 18, borderRadius: '50%', background: 'rgba(0,180,216,0.15)', border: '1.5px solid #00B4D8', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                    <svg width="9" height="7" viewBox="0 0 9 7" fill="none"><path d="M1 3.5L3.2 5.8L8 1" stroke="#00B4D8" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"/></svg>
                   </div>
-                  <span style={{ color: '#00B4D8', fontSize: 14, fontWeight: 600 }}>{row.pf}</span>
+                  <span style={{ color: '#00B4D8', fontSize: 13, fontWeight: 600 }}>{row.pf}</span>
                 </div>
-                <div style={{
-                  padding: '18px 24px',
-                  borderLeft: '1px solid rgba(255,255,255,0.06)',
-                  display: 'flex', alignItems: 'center', gap: 10,
-                }}>
-                  <div style={{
-                    width: 20, height: 20, borderRadius: '50%',
-                    background: 'rgba(255,100,100,0.1)',
-                    border: '1.5px solid rgba(255,100,100,0.4)',
-                    display: 'flex', alignItems: 'center', justifyContent: 'center',
-                    flexShrink: 0,
-                  }}>
-                    <svg width="8" height="8" viewBox="0 0 8 8" fill="none">
-                      <path d="M1 1L7 7M7 1L1 7" stroke="rgba(255,100,100,0.7)" strokeWidth="1.8" strokeLinecap="round"/>
-                    </svg>
+                <div style={{ padding: '17px 24px', borderLeft: '1px solid rgba(255,255,255,0.05)', display: 'flex', alignItems: 'center', gap: 10 }}>
+                  <div style={{ width: 18, height: 18, borderRadius: '50%', background: 'rgba(255,80,80,0.1)', border: '1.5px solid rgba(255,80,80,0.35)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                    <svg width="8" height="8" viewBox="0 0 8 8" fill="none"><path d="M1 1L7 7M7 1L1 7" stroke="rgba(255,80,80,0.65)" strokeWidth="1.7" strokeLinecap="round"/></svg>
                   </div>
-                  <span style={{ color: 'rgba(255,255,255,0.45)', fontSize: 14 }}>{row.traditional}</span>
+                  <span style={{ color: 'rgba(255,255,255,0.38)', fontSize: 13 }}>{row.trad}</span>
                 </div>
               </div>
             </FadeIn>
           ))}
 
-          {/* Table footer */}
+          {/* Footer */}
           <FadeIn>
             <div style={{
-              background: 'linear-gradient(135deg, rgba(0,180,216,0.15), rgba(0,180,216,0.05))',
-              border: '1px solid rgba(0,180,216,0.3)',
-              borderTop: 'none',
-              borderRadius: '0 0 16px 16px',
-              padding: '24px 24px',
-              display: 'grid',
-              gridTemplateColumns: '1fr 1fr 1fr',
+              background: 'linear-gradient(135deg, rgba(0,180,216,0.14), rgba(0,180,216,0.04))',
+              border: '1px solid rgba(0,180,216,0.28)', borderTop: 'none',
+              borderRadius: '0 0 16px 16px', padding: '22px 24px',
+              display: 'grid', gridTemplateColumns: '1fr 1fr 1fr',
             }}>
               <div style={{ display: 'flex', alignItems: 'center' }}>
-                <span style={{ color: 'rgba(255,255,255,0.5)', fontSize: 13, fontWeight: 700, letterSpacing: 1 }}>
-                  OVERALL ADVANTAGE
-                </span>
+                <span style={{ color: 'rgba(255,255,255,0.4)', fontSize: 12, fontWeight: 700, letterSpacing: 1.5 }}>OVERALL ADVANTAGE</span>
               </div>
-              <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                <span style={{
-                  fontFamily: "'Barlow Condensed', sans-serif",
-                  fontWeight: 900, fontSize: 22, color: '#00B4D8',
-                }}>12 / 12</span>
-                <span style={{ color: 'rgba(0,180,216,0.7)', fontSize: 13 }}>Categories</span>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                <span style={{ fontFamily: "'Barlow Condensed',sans-serif", fontWeight: 900, fontSize: 24, color: '#00B4D8' }}>12 / 12</span>
+                <span style={{ color: 'rgba(0,180,216,0.7)', fontSize: 13 }}>categories</span>
               </div>
               <div style={{ display: 'flex', alignItems: 'center' }}>
-                <span style={{ color: 'rgba(255,255,255,0.3)', fontSize: 13 }}>0 / 12</span>
+                <span style={{ color: 'rgba(255,255,255,0.25)', fontSize: 13 }}>0 / 12</span>
               </div>
             </div>
           </FadeIn>
         </div>
-
-        <style>{`
-          @media (max-width: 640px) {
-            .comparison-grid { font-size: 12px !important; }
-          }
-        `}</style>
       </section>
 
       {/* WHO WE SERVE */}
-      <section style={{ padding: '80px 24px' }}>
+      <SlashDivider color="#0A1172" flip/>
+      <section style={{ padding: '80px 24px', background: '#0A1172' }}>
         <div style={{ maxWidth: 1100, margin: '0 auto' }}>
           <FadeIn>
             <div style={{ textAlign: 'center', marginBottom: 52 }}>
-              <h2 style={{
-                fontFamily: "'Barlow Condensed', sans-serif",
-                fontWeight: 900, fontSize: 'clamp(32px, 5vw, 48px)',
-                color: 'white', margin: '0 0 12px',
-              }}>WHO WE SERVE</h2>
-              <p style={{ color: 'rgba(255,255,255,0.55)', fontSize: 16 }}>
-                Precision Flowline solutions are engineered for clients who demand results
-              </p>
+              <h2 style={{ fontFamily: "'Barlow Condensed',sans-serif", fontWeight: 900, fontSize: 'clamp(30px,5vw,48px)', color: '#fff', margin: '0 0 10px' }}>WHO WE SERVE</h2>
+              <p style={{ color: 'rgba(255,255,255,0.45)', fontSize: 15 }}>Precision Flowline solutions engineered for clients who demand results</p>
             </div>
           </FadeIn>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 24 }}>
-            {[
-              {
-                icon: '🏛️',
-                title: 'Municipal Engineers',
-                desc: 'Road departments, DOT agencies, and city infrastructure teams benefit from reduced traffic control costs, faster project closeout, and verified flow documentation for compliance.',
-                tags: ['DOT Projects', 'Roadway Ponding', 'Municipal ROW'],
-              },
-              {
-                icon: '🏢',
-                title: 'Property Managers',
-                desc: 'Commercial and retail property managers eliminate parking lot liability, reduce tenant complaints, and protect pavement assets — at a fraction of traditional overlay costs.',
-                tags: ['Parking Lots', 'Retail Centers', 'Commercial Complexes'],
-              },
-              {
-                icon: '🏗️',
-                title: 'General Contractors',
-                desc: 'GCs and civil contractors use Precision Flowline as a high-value subcontractor — delivering superior drainage results without the schedule impact of traditional methods.',
-                tags: ['Subcontractor Work', 'Site Development', 'Grading & Drainage'],
-              },
-              {
-                icon: '🏭',
-                title: 'Industrial Facilities',
-                desc: 'Warehouses, distribution centers, and industrial campuses can\'t afford weeks-long closures. Our single-day solutions keep operations running.',
-                tags: ['Warehouses', 'Loading Docks', 'Industrial Sites'],
-              },
-            ].map((item, i) => (
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: 22 }}>
+            {clients.map((c, i) => (
               <FadeIn key={i} delay={i * 0.1}>
-                <div style={{
-                  padding: '32px 28px',
-                  background: 'linear-gradient(135deg, rgba(255,255,255,0.04), transparent)',
-                  border: '1px solid rgba(255,255,255,0.08)',
-                  borderRadius: 20,
-                  height: '100%',
-                }}>
-                  <div style={{ fontSize: 36, marginBottom: 16 }}>{item.icon}</div>
-                  <h3 style={{ color: 'white', fontWeight: 800, fontSize: 20, margin: '0 0 12px' }}>{item.title}</h3>
-                  <p style={{ color: 'rgba(255,255,255,0.55)', fontSize: 14, lineHeight: 1.7, margin: '0 0 20px' }}>{item.desc}</p>
-                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
-                    {item.tags.map(tag => (
-                      <span key={tag} style={{
-                        padding: '4px 12px',
-                        background: 'rgba(0,180,216,0.1)',
-                        border: '1px solid rgba(0,180,216,0.25)',
-                        borderRadius: 100,
-                        color: '#48CAE4', fontSize: 12, fontWeight: 600,
-                      }}>{tag}</span>
+                <div style={{ padding: '30px 26px', background: 'linear-gradient(135deg, rgba(255,255,255,0.04), transparent)', border: '1px solid rgba(255,255,255,0.07)', borderRadius: 20 }}>
+                  <div style={{ fontSize: 34, marginBottom: 14 }}>{c.icon}</div>
+                  <h3 style={{ color: '#fff', fontWeight: 800, fontSize: 19, margin: '0 0 12px' }}>{c.t}</h3>
+                  <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: 13, lineHeight: 1.7, margin: '0 0 18px' }}>{c.d}</p>
+                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
+                    {c.tags.map(tag => (
+                      <span key={tag} style={{ padding: '3px 10px', background: 'rgba(0,180,216,0.1)', border: '1px solid rgba(0,180,216,0.22)', borderRadius: 100, color: '#48CAE4', fontSize: 11, fontWeight: 600 }}>{tag}</span>
                     ))}
                   </div>
                 </div>
@@ -285,32 +178,14 @@ export default function WhyPF() {
 
       {/* CTA */}
       <FadeIn>
-        <section style={{
-          padding: '80px 24px',
-          background: 'linear-gradient(135deg, rgba(0,180,216,0.12), rgba(0,180,216,0.04))',
-          borderTop: '1px solid rgba(0,180,216,0.2)',
-          textAlign: 'center',
-        }}>
-          <h2 style={{
-            fontFamily: "'Barlow Condensed', sans-serif",
-            fontWeight: 900, fontSize: 'clamp(32px, 5vw, 52px)',
-            color: 'white', margin: '0 0 16px',
-          }}>
+        <section style={{ padding: '80px 24px', background: 'linear-gradient(135deg, rgba(0,180,216,0.12), rgba(74,144,217,0.05))', borderTop: '1px solid rgba(0,180,216,0.2)', textAlign: 'center' }}>
+          <h2 style={{ fontFamily: "'Barlow Condensed',sans-serif", fontWeight: 900, fontSize: 'clamp(30px,5vw,50px)', color: '#fff', margin: '0 0 16px' }}>
             THE CHOICE IS <span style={{ color: '#00B4D8' }}>CLEAR</span>
           </h2>
-          <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: 18, margin: '0 0 36px', maxWidth: 560, marginLeft: 'auto', marginRight: 'auto' }}>
-            Stop overpaying for traditional methods that take longer and deliver less.
-            Get a free site assessment today.
+          <p style={{ color: 'rgba(255,255,255,0.55)', fontSize: 17, margin: '0 auto 36px', maxWidth: 520 }}>
+            Stop overpaying for traditional methods that take longer and deliver less. Get a free site assessment today.
           </p>
-          <Link to="/contact" style={{
-            display: 'inline-block',
-            padding: '18px 44px',
-            background: 'linear-gradient(135deg, #00B4D8, #48CAE4)',
-            color: '#0A0F6B', borderRadius: 10,
-            fontWeight: 800, fontSize: 18,
-            textDecoration: 'none',
-            boxShadow: '0 8px 32px rgba(0,180,216,0.35)',
-          }}>
+          <Link to="/contact" style={{ display: 'inline-block', padding: '17px 42px', background: 'linear-gradient(135deg, #00B4D8, #48CAE4)', color: '#0A1172', borderRadius: 10, fontWeight: 800, fontSize: 17, textDecoration: 'none', boxShadow: '0 8px 30px rgba(0,180,216,0.35)' }}>
             Get Your Free Assessment
           </Link>
         </section>
